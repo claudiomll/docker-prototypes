@@ -1,0 +1,15 @@
+# docker-compose.yml 
+version: '3'
+
+services:
+  portainer:
+    image: portainer/portainer-ce:2.13.1
+    container_name: portainer
+    restart: unless-stopped
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /data/portainer-data:/data
+      - /run/podman/podman.sock:/var/run/docker.sock
+    ports:
+      - 9000:9000
+

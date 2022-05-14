@@ -1,0 +1,31 @@
+version: "3.6"
+services:
+  influxdb:
+    image: influxdb:1.8
+    ports:
+    - 8086:8086
+    volumes:
+        - /data/tick/influx-data:/var/lib/influxdb
+  chronograf:
+    image: chronograf
+    ports:
+    - 8888:8888
+    command: ["chronograf", "--influxdb-url=http://influxdb:8086"]
+    volumes:
+    - /data/tick/chronograf-data:/var/lib/chronograf
+  kapacitor:
+    image: kapacitor
+    environment:
+      KAPACITOR_HOSTNAME: kapacitor
+      KAPACITOR_INFLUXDB_0_URLS_0: http://influxdb:8086
+    ports:
+    - 9092:9092
+    volumes:
+    - /data/tick/kapacitor-data:/var/lib/kapacitor
+  telegraf:
+    hostname: telegraf
+    privileged: true
+    image: "telegraf:latest"
+    volumes:
+    - ./telegraf.conf:/etc/telegraf/telegraf.conf
+    - /run/podman/podman.sock:/var/run/docker.sock

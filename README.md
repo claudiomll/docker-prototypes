@@ -1,2 +1,2 @@
 # docker-prototypes
-Docker - Services to Prototype Solutions
+Docker Compose Services to Prototype Solutions

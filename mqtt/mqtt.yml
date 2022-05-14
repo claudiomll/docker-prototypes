@@ -1,0 +1,7 @@
+version: '3'
+
+services:
+  mqtt:
+    image: ncarlier/mqtt
+    ports:
+      - "1883:1883"
