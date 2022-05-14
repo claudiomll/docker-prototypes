@@ -5,7 +5,7 @@ services:
     image: codercom/code-server:v2
     volumes:
       # Set <project dir> to the directory you want to open in VS Code.
-      - /data/vscode/$VSCODE_USER/project:/home/coder/project
+      - /data/vscode/$VSCODE_USER}/project:/home/coder/project
       # <vs code config> should point to a local dir where vs code stores its data.
       - /code/vscode/${VSCODE_USER}/config:/home/coder/.local/share/code-server
     ports:
