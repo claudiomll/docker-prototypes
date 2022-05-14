@@ -2,7 +2,7 @@ version: '3'
 services:
   vscode:
     container_name: vscode
-    image: codercom/code-server:v2
+    image: linuxserver/code-server
     volumes:
       # Set <project dir> to the directory you want to open in VS Code.
       - /data/vscode/$VSCODE_USER}/project:/home/coder/project
