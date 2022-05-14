@@ -1,14 +1,20 @@
 version: '3'
+
 services:
   vscode:
     image: linuxserver/code-server:latest
-    volumes:
-      - /data/vscode/$VSCODE_USER}/project:/home/coder/project
-      - /code/vscode/${VSCODE_USER}/config:/home/coder/.local/share/code-server
-    ports:
-      - "8443:8443"
-    command: code-server --auth password --port 8443 --disable-telemetry /home/coder/project
     environment:
-      PASSWORD: "${VSCODE_PASSWORD}"
+      - PUID=1000
+      - PGID=1000
+      - TZ=Americas/Los_Angeles
+      - PASSWORD=${VSCODE_PASSWORD} #optional
+        #- HASHED_PASSWORD= #optional
+        #- SUDO_PASSWORD=password #optional
+        #- SUDO_PASSWORD_HASH= #optional
+        #- PROXY_DOMAIN=code-server.my.domain #optional
+      - DEFAULT_WORKSPACE=/config/workspace #optional
+    volumes:
+      - /data/vscode/${VSCODE_USER}:/config:rw
+    ports:
+      - 8443:8443
     restart: unless-stopped
-
